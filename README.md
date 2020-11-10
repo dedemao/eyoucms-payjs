@@ -34,25 +34,25 @@ location / {
 ## 使用
 ### 如何支付
 指定订单金额：
-http://yourname/pay/index?total_fee=0.01
+http://yourname/?m=plugins&c=payjs&a=index&total_fee=0.01
 
 指定订单号：
-http://yourname/pay/index?total_fee=0.01&out_trade_no=123456
+http://yourname/?m=plugins&c=payjs&a=index&total_fee=0.01&out_trade_no=123456
 
 指定订单标题：
-http://yourname/pay/index?total_fee=0.01&subject=测试
+http://yourname/?m=plugins&c=payjs&a=index&total_fee=0.01&subject=测试
 
 指定支付通道：
-http://yourname/pay/index?total_fee=0.01&pay_channel=weixin
+http://yourname/?m=plugins&c=payjs&a=index&total_fee=0.01&pay_channel=weixin
 
 指定使用JSAPI支付
-http://yourname/pay/index?total_fee=0.01&pay_mode=jsapi
+http://yourname/?m=plugins&c=payjs&a=index&total_fee=0.01&pay_mode=jsapi
 
 指定使用收银台支付
-http://yourname/pay/index?total_fee=0.01&pay_mode=cashier
+http://yourname/?m=plugins&c=payjs&a=index&total_fee=0.01&pay_mode=cashier
 
 全都指定：
-http://yourname/pay/index?out_trade_no=123456&total_fee=0.01&subject=测试&pay_channel=weixin
+http://yourname/?m=plugins&c=payjs&a=index&total_fee=0.01?out_trade_no=123456&subject=测试&pay_channel=weixin
 
 ### 异步通知
 异步通知在/application/plugins/controller/Payjs.php中的notify方法
