@@ -210,6 +210,7 @@
         var out_trade_no = $("#out_trade_no").val();
         t = setInterval(function () {
             var url = "{:addon_url('payjs/checkOrder')}&out_trade_no=" + out_trade_no;
+            clearInterval(t);
             $.getJSON(url, function (result) {
                 //alert(result.code);
                 if (result.code == 0) {
@@ -218,13 +219,16 @@
                 if (result.code == 2) {
                     $("#wait-pay").show();
                     $("#tips").text('等待付款');
+                    checkOrder(qrurl);
                 }
             });
         }, 2000);
 
-        var html = '<img src="' + qrurl + '" style="display: block;margin: auto;"/>';
-        $('#qrDiv').html(html);
-
+        var html = $('#qrDiv').html();
+        if(html.indexOf(qrurl)==-1){
+            html = '<img src="' + qrurl + '" style="display: block;margin: auto;"/>';
+            $('#qrDiv').html(html);
+        }
     }
 </script>
 </body>

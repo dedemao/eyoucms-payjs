@@ -213,7 +213,7 @@ class Payjs extends Weapp
         if(!$configRow){
             $data['pay_name'] = 'Payjs';
             $data['pay_mark'] = 'Payjs';
-            $data['pay_info'] = 'a:1:{s:11:\"is_open_pay\";i:0;}';
+            $data['pay_info'] = 'a:1:{s:11:"is_open_pay";i:0;}';
             $data['pay_terminal'] = '';
             $data['system_built'] = 0;
             $data['status'] = 1;
@@ -231,8 +231,10 @@ class Payjs extends Weapp
 
     public function UnifyGetPayAction($PayInfo, $Order)
     {
+        $cause = unserialize($Order['cause']) ? unserialize($Order['cause']) : $Order['cause'];
+        $subject = $cause['type_name'] ? $cause['type_name'] : $Order['cause'];
         return [
-            'url' => url('plugins/payjs/index', ['out_trade_no' => $Order['order_number'], 'total_fee' => $Order['money'], 'subject' => $Order['cause']]),
+            'url' => url('plugins/payjs/index', ['out_trade_no' => $Order['order_number'], 'total_fee' => $Order['money'], 'subject' => $subject]),
             'data' => [
                 'appId' => null,
                 'url_qrcode' => null
@@ -242,9 +244,9 @@ class Payjs extends Weapp
 
     public function OtherPayProcessing($PayInfo, $outTradeNo)
     {
-        $data = PayjsOrders::orderQuery($outTradeNo);
-        if($data['status']=='success'){
-            return $data;
+        $order = PayjsOrders::getPayjsOrder($outTradeNo);
+        if($order && $order['status']==0){
+            return (array)$order;
         }
         return false;
     }

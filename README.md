@@ -5,14 +5,26 @@
 
 安装文档：https://www.eyoucms.com/help/azwt/2020/1012/11028.html
 
+注：如果web环境是nginx，还需设置伪静态规则：
+```
+location / {
+	if (!-e $request_filename){
+		rewrite  ^(.*)$  /index.php?s=$1  last;   break;
+	}
+}
+```
+
 ## 安装
 
 1. 下载插件压缩包：https://github.com/dedemao/eyoucms-payjs/archive/v1.0.0.zip
 
 2. 解压压缩包，将解压后的文件夹覆盖到网站的根目录。
 
-3. 登录后台，启用并设置插件
+3. 登录后台，在菜单中选择`插件应用`，点击`安装`按钮。
 
+4. 在`插件应用`中点击`PAYJS`下的`管理`链接，点击`插件配置`，填写配置信息。
+
+5. 填写好配置信息后即可在`订单列表`中点击`测试支付`进行测试，也可以登录前台会员中心测试在线充值。
 
 ## 卸载
 
